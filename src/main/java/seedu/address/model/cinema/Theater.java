@@ -18,4 +18,9 @@ public class Theater {
     public void setTheaterNumber(int theaterNumber) {
         this.theaterNumber = theaterNumber;
     }
+
+    @Override
+    public String toString() {
+        return "Theater " + theaterNumber;
+    }
 }

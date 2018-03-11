@@ -2,6 +2,7 @@ package seedu.address.model.cinema;
 
 import static seedu.address.commons.util.CollectionUtil.requireAllNonNull;
 
+import java.util.ArrayList;
 import java.util.Collections;
 import java.util.Objects;
 import java.util.Set;
@@ -19,7 +20,7 @@ public class Cinema {
     private final Phone phone;
     private final Email email;
     private final Address address;
-
+    private final ArrayList<Theater> theaters;
     private final UniqueTagList tags;
 
     /**
@@ -31,6 +32,7 @@ public class Cinema {
         this.phone = phone;
         this.email = email;
         this.address = address;
+        this.theaters = new ArrayList<Theater>();
         // protect internal tags from changes in the arg list
         this.tags = new UniqueTagList(tags);
     }
@@ -59,6 +61,10 @@ public class Cinema {
         return Collections.unmodifiableSet(tags.toSet());
     }
 
+    public ArrayList<Theater> getTheaters() {
+        return theaters;
+    }
+
     @Override
     public boolean equals(Object other) {
         if (other == this) {
@@ -79,7 +85,7 @@ public class Cinema {
     @Override
     public int hashCode() {
         // use this method for custom fields hashing instead of implementing your own
-        return Objects.hash(name, phone, email, address, tags);
+        return Objects.hash(name, phone, email, address, tags, theaters);
     }
 
     @Override
@@ -88,12 +94,18 @@ public class Cinema {
         builder.append(getName())
                 .append(" Phone: ")
                 .append(getPhone())
-                .append(" Email: ")
+                .append(" " +
+                        "Email: ")
                 .append(getEmail())
-                .append(" Address: ")
+                .
+                        append(" Address: ")
                 .append(getAddress())
                 .append(" Tags: ");
         getTags().forEach(builder::append);
+        builder.append(" Theaters: ");
+        for (int i = 1; i <= theaters.size(); i++) {
+            builder.append(theaters.get(i).toString() + " ");
+        }
         return builder.toString();
     }
 
