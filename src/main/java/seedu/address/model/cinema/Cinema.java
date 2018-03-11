@@ -26,15 +26,15 @@ public class Cinema {
     /**
      * Every field must be present and not null.
      */
-    public Cinema(Name name, Phone phone, Email email, Address address, Set<Tag> tags) {
+    public Cinema(Name name, Phone phone, Email email, Address address, Set<Tag> tags, ArrayList<Theater> theaters) {
         requireAllNonNull(name, phone, email, address, tags);
         this.name = name;
         this.phone = phone;
         this.email = email;
         this.address = address;
-        this.theaters = new ArrayList<Theater>();
         // protect internal tags from changes in the arg list
         this.tags = new UniqueTagList(tags);
+        this.theaters = theaters;
     }
 
     public Name getName() {
