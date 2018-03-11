@@ -8,6 +8,8 @@ import static seedu.address.logic.parser.CliSyntax.PREFIX_PHONE;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_TAG;
 import static seedu.address.model.Model.PREDICATE_SHOW_ALL_CINEMAS;
 
+import java.lang.reflect.Array;
+import java.util.ArrayList;
 import java.util.Collections;
 import java.util.HashSet;
 import java.util.List;
@@ -24,6 +26,7 @@ import seedu.address.model.cinema.Cinema;
 import seedu.address.model.cinema.Email;
 import seedu.address.model.cinema.Name;
 import seedu.address.model.cinema.Phone;
+import seedu.address.model.cinema.Theater;
 import seedu.address.model.cinema.exceptions.CinemaNotFoundException;
 import seedu.address.model.cinema.exceptions.DuplicateCinemaException;
 import seedu.address.model.tag.Tag;
@@ -108,8 +111,10 @@ public class EditCommand extends UndoableCommand {
         Email updatedEmail = editCinemaDescriptor.getEmail().orElse(cinemaToEdit.getEmail());
         Address updatedAddress = editCinemaDescriptor.getAddress().orElse(cinemaToEdit.getAddress());
         Set<Tag> updatedTags = editCinemaDescriptor.getTags().orElse(cinemaToEdit.getTags());
+        List<Theater> updatedTheaters = editCinemaDescriptor.getTheaters().orElse(cinemaToEdit.getTheaters());
+        ArrayList<Theater> updatedTheaterList = new ArrayList<>(updatedTheaters);
 
-        return new Cinema(updatedName, updatedPhone, updatedEmail, updatedAddress, updatedTags);
+        return new Cinema(updatedName, updatedPhone, updatedEmail, updatedAddress, updatedTags, updatedTheaterList);
     }
 
     @Override
@@ -140,6 +145,7 @@ public class EditCommand extends UndoableCommand {
         private Phone phone;
         private Email email;
         private Address address;
+        private ArrayList<Theater> theaters;
         private Set<Tag> tags;
 
         public EditCinemaDescriptor() {}
@@ -210,6 +216,10 @@ public class EditCommand extends UndoableCommand {
          */
         public Optional<Set<Tag>> getTags() {
             return (tags != null) ? Optional.of(Collections.unmodifiableSet(tags)) : Optional.empty();
+        }
+
+        public Optional<List<Theater>> getTheaters() {
+            return (theaters != null) ? Optional.of(Collections.unmodifiableList(theaters)) : Optional.empty();
         }
 
         @Override

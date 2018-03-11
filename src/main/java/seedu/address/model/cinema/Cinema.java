@@ -27,7 +27,7 @@ public class Cinema {
      * Every field must be present and not null.
      */
     public Cinema(Name name, Phone phone, Email email, Address address, Set<Tag> tags, ArrayList<Theater> theaters) {
-        requireAllNonNull(name, phone, email, address, tags);
+        requireAllNonNull(name, phone, email, address, tags, theaters);
         this.name = name;
         this.phone = phone;
         this.email = email;
@@ -103,7 +103,7 @@ public class Cinema {
                 .append(" Tags: ");
         getTags().forEach(builder::append);
         builder.append(" Theaters: ");
-        for (int i = 1; i <= theaters.size(); i++) {
+        for (int i = 0; i < theaters.size(); i++) {
             builder.append(theaters.get(i).toString() + " ");
         }
         return builder.toString();

@@ -14,6 +14,7 @@ import seedu.address.model.cinema.Cinema;
 import seedu.address.model.cinema.Email;
 import seedu.address.model.cinema.Name;
 import seedu.address.model.cinema.Phone;
+import seedu.address.model.cinema.Theater;
 import seedu.address.model.tag.Tag;
 
 /**
@@ -114,7 +115,8 @@ public class XmlAdaptedCinema {
         final Address address = new Address(this.address);
 
         final Set<Tag> tags = new HashSet<>(cinemaTags);
-        return new Cinema(name, phone, email, address, tags);
+        final ArrayList<Theater> theaters = new ArrayList<Theater>();
+        return new Cinema(name, phone, email, address, tags, theaters);
     }
 
     @Override
