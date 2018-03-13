@@ -16,13 +16,13 @@ public class MovieBuilder {
     public static final String DEFAULT_RATING = "PG";
     public static final String DEFAULT_STARTDATE = "13/03/2018";
 
-    private MovieName moviename;
+    private MovieName movieName;
     private Duration duration;
     private Rating rating;
     private StartDate startDate;
 
     public MovieBuilder() {
-        moviename = new MovieName(DEFAULT_MOVIENAME);
+        movieName = new MovieName(DEFAULT_MOVIENAME);
         duration = new Duration(DEFAULT_DURATION);
         rating = new Rating(DEFAULT_RATING);
         startDate = new StartDate(DEFAULT_STARTDATE);
@@ -32,7 +32,7 @@ public class MovieBuilder {
      * Initializes the MovieBuilder with the data of {@code movieToCopy}.
      */
     public MovieBuilder(Movie movieToCopy) {
-        moviename = movieToCopy.getName();
+        movieName = movieToCopy.getName();
         duration = movieToCopy.getDuration();
         rating = movieToCopy.getRating();
         startDate = movieToCopy.getStartDate();
@@ -41,8 +41,8 @@ public class MovieBuilder {
     /**
      * Sets the {@code MovieName} of the {@code Movie} that we are building.
      */
-    public MovieBuilder withName(String moviename) {
-        this.moviename = new MovieName(moviename);
+    public MovieBuilder withName(String movieName) {
+        this.movieName = new MovieName(movieName);
         return this;
     }
 
@@ -71,7 +71,7 @@ public class MovieBuilder {
     }
 
     public Movie build() {
-        return new Movie(moviename, duration, rating, startDate);
+        return new Movie(movieName, duration, rating, startDate);
     }
 
 }

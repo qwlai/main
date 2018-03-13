@@ -26,7 +26,7 @@ public class MovieCard extends UiPart<Region> {
     @FXML
     private HBox cardPane;
     @FXML
-    private Label name;
+    private Label movieName;
     @FXML
     private Label id;
     @FXML
@@ -40,7 +40,7 @@ public class MovieCard extends UiPart<Region> {
         super(FXML);
         this.movie = movie;
         id.setText(displayedIndex + ". ");
-        name.setText(movie.getName().toString());
+        movieName.setText(movie.getName().toString());
         duration.setText((movie.getDuration().toString()));
         rating.setText((movie.getRating().toString()));
         startDate.setText((movie.getStartDate().toString()));

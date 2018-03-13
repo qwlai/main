@@ -173,14 +173,14 @@ public class ParserUtil {
     }
 
     /**
-     * Parses a {@code String moviename} into a {@code MovieName}.
+     * Parses a {@code String movieName} into a {@code MovieName}.
      * Leading and trailing whitespaces will be trimmed.
      *
-     * @throws IllegalValueException if the given {@code moviename} is invalid.
+     * @throws IllegalValueException if the given {@code movieName} is invalid.
      */
-    public static MovieName parseMovieName(String moviename) throws IllegalValueException {
-        requireNonNull(moviename);
-        String trimmedMovieName = moviename.trim();
+    public static MovieName parseMovieName(String movieName) throws IllegalValueException {
+        requireNonNull(movieName);
+        String trimmedMovieName = movieName.trim();
         if (!MovieName.isValidName(trimmedMovieName)) {
             throw new IllegalValueException(MovieName.MESSAGE_MOVIENAME_CONSTRAINTS);
         }
@@ -188,12 +188,12 @@ public class ParserUtil {
     }
 
     /**
-     * Parses a {@code Optional<String> moviename} into an {@code Optional<MovieName>} if {@code moviename} is present.
+     * Parses a {@code Optional<String> movieName} into an {@code Optional<MovieName>} if {@code movieName} is present.
      * See header comment of this class regarding the use of {@code Optional} parameters.
      */
-    public static Optional<MovieName> parseMovieName(Optional<String> moviename) throws IllegalValueException {
-        requireNonNull(moviename);
-        return moviename.isPresent() ? Optional.of(parseMovieName(moviename.get())) : Optional.empty();
+    public static Optional<MovieName> parseMovieName(Optional<String> movieName) throws IllegalValueException {
+        requireNonNull(movieName);
+        return movieName.isPresent() ? Optional.of(parseMovieName(movieName.get())) : Optional.empty();
     }
 
     /**

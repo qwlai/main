@@ -20,7 +20,7 @@ public class XmlAdaptedMovie {
     public static final String MISSING_FIELD_MESSAGE_FORMAT = "Movie's %s field is missing!";
 
     @XmlElement(required = true)
-    private String moviename;
+    private String movieName;
     @XmlElement(required = true)
     private String duration;
     @XmlElement(required = true)
@@ -37,8 +37,8 @@ public class XmlAdaptedMovie {
     /**
      * Constructs an {@code XmlAdaptedCinema} with the given movie details.
      */
-    public XmlAdaptedMovie(String moviename, String duration, String rating, String startDate) {
-        this.moviename = moviename;
+    public XmlAdaptedMovie(String movieName, String duration, String rating, String startDate) {
+        this.movieName = movieName;
         this.duration = duration;
         this.rating = rating;
         this.startDate = startDate;
@@ -50,7 +50,7 @@ public class XmlAdaptedMovie {
      * @param source future changes to this will not affect the created XmlAdaptedMovie
      */
     public XmlAdaptedMovie(Movie source) {
-        moviename = source.getName().movieName;
+        movieName = source.getName().movieName;
         duration = source.getDuration().duration;
         rating = source.getRating().rating;
         startDate = source.getStartDate().startDate;
@@ -63,14 +63,14 @@ public class XmlAdaptedMovie {
      */
     public Movie toModelType() throws IllegalValueException {
 
-        if (this.moviename == null) {
+        if (this.movieName == null) {
             throw new IllegalValueException(String.format(MISSING_FIELD_MESSAGE_FORMAT,
                     MovieName.class.getSimpleName()));
         }
-        if (!MovieName.isValidName(this.moviename)) {
+        if (!MovieName.isValidName(this.movieName)) {
             throw new IllegalValueException(MovieName.MESSAGE_MOVIENAME_CONSTRAINTS);
         }
-        final MovieName moviename = new MovieName(this.moviename);
+        final MovieName movieName = new MovieName(this.movieName);
 
         if (this.duration == null) {
             throw new IllegalValueException(String.format(MISSING_FIELD_MESSAGE_FORMAT,
@@ -98,7 +98,7 @@ public class XmlAdaptedMovie {
         }
         final StartDate startDate = new StartDate(this.startDate);
 
-        return new Movie(moviename, duration, rating, startDate);
+        return new Movie(movieName, duration, rating, startDate);
     }
 
     @Override
@@ -112,7 +112,7 @@ public class XmlAdaptedMovie {
         }
 
         XmlAdaptedMovie otherMovie = (XmlAdaptedMovie) other;
-        return Objects.equals(moviename, otherMovie.moviename)
+        return Objects.equals(movieName, otherMovie.movieName)
                 && Objects.equals(duration, otherMovie.duration)
                 && Objects.equals(rating, otherMovie.rating)
                 && Objects.equals(startDate, otherMovie.startDate);

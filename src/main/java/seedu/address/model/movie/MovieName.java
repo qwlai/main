@@ -23,12 +23,12 @@ public class MovieName {
     /**
      * Constructs a {@code Name}.
      *
-     * @param moviename A valid name.
+     * @param movieName A valid name.
      */
-    public MovieName(String moviename) {
-        requireNonNull(moviename);
-        checkArgument(isValidName(moviename), MESSAGE_MOVIENAME_CONSTRAINTS);
-        this.movieName = moviename;
+    public MovieName(String movieName) {
+        requireNonNull(movieName);
+        checkArgument(isValidName(movieName), MESSAGE_MOVIENAME_CONSTRAINTS);
+        this.movieName = movieName;
     }
 
     /**
