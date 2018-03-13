@@ -22,6 +22,7 @@ import org.junit.rules.ExpectedException;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import seedu.address.model.cinema.Cinema;
+import seedu.address.model.cinema.Theater;
 import seedu.address.model.movie.Movie;
 import seedu.address.model.tag.Tag;
 import seedu.address.model.tag.exceptions.TagNotFoundException;
@@ -39,6 +40,7 @@ public class AddressBookTest {
     public void constructor() {
         assertEquals(Collections.emptyList(), addressBook.getCinemaList());
         assertEquals(Collections.emptyList(), addressBook.getTagList());
+        assertEquals(Collections.emptyList(), addressBook.getTheaterList());
     }
 
     @Test
@@ -60,7 +62,8 @@ public class AddressBookTest {
         List<Cinema> newCinemas = Arrays.asList(ALICE, ALICE);
         List<Tag> newTags = new ArrayList<>(ALICE.getTags());
         List<Movie> newMovies = new ArrayList<>();
-        AddressBookStub newData = new AddressBookStub(newCinemas, newTags, newMovies);
+        List<Theater> newTheaters = new ArrayList<>(ALICE.getTheaters());
+        AddressBookStub newData = new AddressBookStub(newCinemas, newTags, newTheaters, newMovies);
 
         thrown.expect(AssertionError.class);
         addressBook.resetData(newData);
@@ -131,11 +134,14 @@ public class AddressBookTest {
         private final ObservableList<Cinema> cinemas = FXCollections.observableArrayList();
         private final ObservableList<Tag> tags = FXCollections.observableArrayList();
         private final ObservableList<Movie> movies = FXCollections.observableArrayList();
+        private final ObservableList<Theater> theaters = FXCollections.observableArrayList();
 
-        AddressBookStub(Collection<Cinema> cinemas, Collection<? extends Tag> tags, Collection<Movie> movies) {
+        AddressBookStub(Collection<Cinema> cinemas, Collection<? extends Tag> tags,
+                        Collection<Theater> theaters, Collection<Movie> movies) {
             this.cinemas.setAll(cinemas);
             this.tags.setAll(tags);
             this.movies.setAll(movies);
+            this.theaters.setAll(theaters);
         }
 
         @Override
@@ -151,6 +157,11 @@ public class AddressBookTest {
         @Override
         public ObservableList<Movie> getMovieList() {
             return movies;
+        }
+
+        @Override
+        public ObservableList<Theater> getTheaterList() {
+            return theaters;
         }
     }
 

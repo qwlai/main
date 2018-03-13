@@ -9,7 +9,7 @@ import static seedu.address.commons.util.AppUtil.checkArgument;
  */
 public class MovieName {
 
-    public static final String MESSAGE_NAME_CONSTRAINTS =
+    public static final String MESSAGE_MOVIENAME_CONSTRAINTS =
             " names should only contain alphanumeric characters and spaces, and it should not be blank";
 
     /*
@@ -27,7 +27,7 @@ public class MovieName {
      */
     public MovieName(String moviename) {
         requireNonNull(moviename);
-        checkArgument(isValidName(moviename), MESSAGE_NAME_CONSTRAINTS);
+        checkArgument(isValidName(moviename), MESSAGE_MOVIENAME_CONSTRAINTS);
         this.movieName = moviename;
     }
 

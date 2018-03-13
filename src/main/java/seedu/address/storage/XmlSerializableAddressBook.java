@@ -21,6 +21,10 @@ public class XmlSerializableAddressBook {
     private List<XmlAdaptedCinema> cinemas;
     @XmlElement
     private List<XmlAdaptedTag> tags;
+    @XmlElement
+    private List<XmlAdaptedMovie> movies;
+    @XmlElement
+    private List<XmlAdaptedTheater> theaters;
 
     /**
      * Creates an empty XmlSerializableAddressBook.
@@ -29,6 +33,8 @@ public class XmlSerializableAddressBook {
     public XmlSerializableAddressBook() {
         cinemas = new ArrayList<>();
         tags = new ArrayList<>();
+        movies = new ArrayList<>();
+        theaters = new ArrayList<>();
     }
 
     /**
@@ -38,6 +44,8 @@ public class XmlSerializableAddressBook {
         this();
         cinemas.addAll(src.getCinemaList().stream().map(XmlAdaptedCinema::new).collect(Collectors.toList()));
         tags.addAll(src.getTagList().stream().map(XmlAdaptedTag::new).collect(Collectors.toList()));
+        movies.addAll(src.getMovieList().stream().map(XmlAdaptedMovie::new).collect(Collectors.toList()));
+        theaters.addAll(src.getTheaterList().stream().map(XmlAdaptedTheater::new).collect(Collectors.toList()));
     }
 
     /**
@@ -54,6 +62,14 @@ public class XmlSerializableAddressBook {
         for (XmlAdaptedCinema c : cinemas) {
             addressBook.addCinema(c.toModelType());
         }
+
+        for (XmlAdaptedMovie m : movies) {
+            addressBook.addMovie(m.toModelType());
+        }
+
+        for (XmlAdaptedTheater th : theaters) {
+            addressBook.addTheater(th.toModelType());
+        }
         return addressBook;
     }
 
@@ -68,6 +84,9 @@ public class XmlSerializableAddressBook {
         }
 
         XmlSerializableAddressBook otherAb = (XmlSerializableAddressBook) other;
-        return cinemas.equals(otherAb.cinemas) && tags.equals(otherAb.tags);
+        return cinemas.equals(otherAb.cinemas)
+                && tags.equals(otherAb.tags)
+                && theaters.equals(otherAb.theaters)
+                && movies.equals(otherAb.movies);
     }
 }

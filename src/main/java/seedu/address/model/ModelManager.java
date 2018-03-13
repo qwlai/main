@@ -16,6 +16,7 @@ import seedu.address.model.cinema.Cinema;
 import seedu.address.model.cinema.exceptions.CinemaNotFoundException;
 import seedu.address.model.cinema.exceptions.DuplicateCinemaException;
 import seedu.address.model.movie.Movie;
+import seedu.address.model.movie.exceptions.DuplicateMovieException;
 import seedu.address.model.tag.Tag;
 import seedu.address.model.tag.exceptions.TagNotFoundException;
 
@@ -91,6 +92,13 @@ public class ModelManager extends ComponentManager implements Model {
         addressBook.removeTag(tag);
     }
 
+    @Override
+    public synchronized void addMovie(Movie movie) throws DuplicateMovieException {
+        addressBook.addMovie(movie);
+        updateFilteredMovieList(PREDICATE_SHOW_ALL_MOVIES);
+        indicateAddressBookChanged();
+    }
+
     //=========== Filtered Cinema List Accessors =============================================================
 
     /**
@@ -108,6 +116,11 @@ public class ModelManager extends ComponentManager implements Model {
         filteredCinemas.setPredicate(predicate);
     }
 
+    @Override
+    public void updateFilteredMovieList(Predicate<Movie> predicate) {
+        requireNonNull(predicate);
+        filteredMovies.setPredicate(predicate);
+    }
 
     @Override
     public boolean equals(Object obj) {

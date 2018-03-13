@@ -1,5 +1,7 @@
 package seedu.address.testutil;
 
+import java.util.ArrayList;
+import java.util.List;
 import java.util.Set;
 import java.util.stream.Collectors;
 import java.util.stream.Stream;
@@ -10,6 +12,7 @@ import seedu.address.model.cinema.Cinema;
 import seedu.address.model.cinema.Email;
 import seedu.address.model.cinema.Name;
 import seedu.address.model.cinema.Phone;
+import seedu.address.model.cinema.Theater;
 import seedu.address.model.tag.Tag;
 
 /**
@@ -37,6 +40,7 @@ public class EditCinemaDescriptorBuilder {
         descriptor.setEmail(cinema.getEmail());
         descriptor.setAddress(cinema.getAddress());
         descriptor.setTags(cinema.getTags());
+        descriptor.setTheaters(cinema.getTheaters());
     }
 
     /**
@@ -80,6 +84,18 @@ public class EditCinemaDescriptorBuilder {
         descriptor.setTags(tagSet);
         return this;
     }
+
+    /**
+     * Parses the {@code tags} into a {@code Set<Tag>} and set it to the {@code EditCinemaDescriptor}
+     * that we are building.
+     */
+    public EditCinemaDescriptorBuilder withTheaters(int numOfTheater) {
+        List<Theater> theaterList = Stream.of(numOfTheater).map(Theater::new).collect(Collectors.toList());
+        ArrayList<Theater> newTheaterList = new ArrayList<>(theaterList);
+        descriptor.setTheaters(newTheaterList);
+        return this;
+    }
+
 
     public EditCinemaDescriptor build() {
         return descriptor;

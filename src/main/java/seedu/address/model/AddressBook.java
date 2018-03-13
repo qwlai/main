@@ -2,6 +2,7 @@ package seedu.address.model;
 
 import static java.util.Objects.requireNonNull;
 
+import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.HashSet;
 import java.util.List;
@@ -10,8 +11,10 @@ import java.util.Objects;
 import java.util.Set;
 import java.util.stream.Collectors;
 
+import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import seedu.address.model.cinema.Cinema;
+import seedu.address.model.cinema.Theater;
 import seedu.address.model.cinema.UniqueCinemaList;
 import seedu.address.model.cinema.exceptions.CinemaNotFoundException;
 import seedu.address.model.cinema.exceptions.DuplicateCinemaException;
@@ -32,6 +35,7 @@ public class AddressBook implements ReadOnlyAddressBook {
     private final UniqueCinemaList cinemas;
     private final UniqueMovieList movies;
     private final UniqueTagList tags;
+    private ArrayList<Theater> theaters;
 
     /*
      * The 'unusual' code block below is an non-static initialization block, sometimes used to avoid duplication
@@ -43,6 +47,7 @@ public class AddressBook implements ReadOnlyAddressBook {
     {
         cinemas = new UniqueCinemaList();
         tags = new UniqueTagList();
+        theaters = new ArrayList<>();
         movies = new UniqueMovieList();
     }
 
@@ -66,12 +71,17 @@ public class AddressBook implements ReadOnlyAddressBook {
         this.tags.setTags(tags);
     }
 
+    public void setTheaters(ArrayList<Theater> theaters) {
+        this.theaters = theaters;
+    }
+
     /**
      * Resets the existing data of this {@code AddressBook} with {@code newData}.
      */
     public void resetData(ReadOnlyAddressBook newData) {
         requireNonNull(newData);
         setTags(new HashSet<>(newData.getTagList()));
+        setTheaters(new ArrayList<>(newData.getTheaterList()));
         List<Cinema> syncedCinemaList = newData.getCinemaList().stream()
                 .map(this::syncWithMasterTagList)
                 .collect(Collectors.toList());
@@ -140,7 +150,8 @@ public class AddressBook implements ReadOnlyAddressBook {
         final Set<Tag> correctTagReferences = new HashSet<>();
         cinemaTags.forEach(tag -> correctTagReferences.add(masterTagObjects.get(tag)));
         return new Cinema(
-                cinema.getName(), cinema.getPhone(), cinema.getEmail(), cinema.getAddress(), correctTagReferences);
+                cinema.getName(), cinema.getPhone(), cinema.getEmail(),
+                cinema.getAddress(), correctTagReferences, cinema.getTheaters());
     }
 
     /**
@@ -184,7 +195,7 @@ public class AddressBook implements ReadOnlyAddressBook {
 
         if (newTags.remove(tag)) {
             Cinema newCinema = new Cinema(cinema.getName(), cinema.getPhone(), cinema.getEmail(),
-                                          cinema.getAddress(), newTags);
+                                          cinema.getAddress(), newTags, cinema.getTheaters());
             try {
                 updateCinema(cinema, newCinema);
             } catch (CinemaNotFoundException cnfe) {
@@ -213,12 +224,15 @@ public class AddressBook implements ReadOnlyAddressBook {
      * @throws DuplicateMovieException if an equivalent Cinema already exists.
      */
     public void addMovie(Movie movie) throws DuplicateMovieException {
-
         movies.add(movie);
     }
-
+    /**
+    * Adds a Theater to the address book
+    */
+    public void addTheater(Theater t) {
+        theaters.add(t);
+    }
     //// util methods
-
     @Override
     public String toString() {
         return cinemas.asObservableList().size() + " Cinemas, " + tags.asObservableList().size() +  " tags";
@@ -241,16 +255,22 @@ public class AddressBook implements ReadOnlyAddressBook {
     }
 
     @Override
+    public ObservableList<Theater> getTheaterList() {
+        return FXCollections.observableList(theaters);
+    }
+
+    @Override
     public boolean equals(Object other) {
         return other == this // short circuit if same object
                 || (other instanceof AddressBook // instanceof handles nulls
                 && this.cinemas.equals(((AddressBook) other).cinemas)
-                && this.tags.equalsOrderInsensitive(((AddressBook) other).tags));
+                && this.tags.equalsOrderInsensitive(((AddressBook) other).tags)
+                && this.theaters.equals(((AddressBook) other).theaters));
     }
 
     @Override
     public int hashCode() {
         // use this method for custom fields hashing instead of implementing your own
-        return Objects.hash(cinemas, tags);
+        return Objects.hash(cinemas, tags, theaters);
     }
 }

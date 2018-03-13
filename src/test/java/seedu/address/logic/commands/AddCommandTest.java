@@ -25,6 +25,7 @@ import seedu.address.model.cinema.Cinema;
 import seedu.address.model.cinema.exceptions.CinemaNotFoundException;
 import seedu.address.model.cinema.exceptions.DuplicateCinemaException;
 import seedu.address.model.movie.Movie;
+import seedu.address.model.movie.exceptions.DuplicateMovieException;
 import seedu.address.model.tag.Tag;
 import seedu.address.model.tag.exceptions.TagNotFoundException;
 import seedu.address.testutil.CinemaBuilder;
@@ -144,7 +145,17 @@ public class AddCommandTest {
         }
 
         @Override
+        public void addMovie(Movie movie) throws DuplicateMovieException {
+            fail("This method should not be called.");
+        }
+
+        @Override
         public void updateFilteredCinemaList(Predicate<Cinema> predicate) {
+            fail("This method should not be called.");
+        }
+
+        @Override
+        public void updateFilteredMovieList(Predicate<Movie> predicate) {
             fail("This method should not be called.");
         }
     }

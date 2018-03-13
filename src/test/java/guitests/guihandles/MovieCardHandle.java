@@ -1,11 +1,7 @@
 package guitests.guihandles;
 
-import java.util.List;
-import java.util.stream.Collectors;
-
 import javafx.scene.Node;
 import javafx.scene.control.Label;
-import javafx.scene.layout.Region;
 
 /**
  * Provides a handle to a cinema card in the cinema list panel.
