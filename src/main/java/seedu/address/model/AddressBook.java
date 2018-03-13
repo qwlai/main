@@ -54,7 +54,7 @@ public class AddressBook implements ReadOnlyAddressBook {
     public AddressBook() {}
 
     /**
-     * Creates an AddressBook using the Cinemas and Tags in the {@code toBeCopied}
+     * Creates an AddressBook using the Cinemas, Tags and Movies in the {@code toBeCopied}
      */
     public AddressBook(ReadOnlyAddressBook toBeCopied) {
         this();
@@ -75,6 +75,10 @@ public class AddressBook implements ReadOnlyAddressBook {
         this.theaters = theaters;
     }
 
+    public void setMovies(List<Movie> movies) throws DuplicateMovieException {
+        this.movies.setMovies(movies);
+    }
+
     /**
      * Resets the existing data of this {@code AddressBook} with {@code newData}.
      */
@@ -85,11 +89,13 @@ public class AddressBook implements ReadOnlyAddressBook {
         List<Cinema> syncedCinemaList = newData.getCinemaList().stream()
                 .map(this::syncWithMasterTagList)
                 .collect(Collectors.toList());
-
         try {
             setCinemas(syncedCinemaList);
-        } catch (DuplicateCinemaException e) {
+            setMovies(newData.getMovieList());
+        } catch (DuplicateCinemaException dce) {
             throw new AssertionError("AddressBooks should not have duplicate Cinemas");
+        } catch (DuplicateMovieException dne) {
+            throw new AssertionError("AddressBooks should not have duplicate Movies");
         }
     }
 
