@@ -166,7 +166,14 @@ public class AddressBook implements ReadOnlyAddressBook {
         }
     }
 
-    //// tag-level operations
+    /**
+    * Adds a Theater to the address book
+    */
+    public void addTheater(Theater t) {
+        theaters.add(t);
+    }
+
+    //// Tag-level operations
 
     public void addTag(Tag t) throws UniqueTagList.DuplicateTagException {
         tags.add(t);
@@ -218,6 +225,8 @@ public class AddressBook implements ReadOnlyAddressBook {
         tags.setTags(tagsOfCinemas);
     }
 
+
+    //// Movie-level operations
     /**
      * Adds a Movie to the address book.
      *
@@ -226,16 +235,12 @@ public class AddressBook implements ReadOnlyAddressBook {
     public void addMovie(Movie movie) throws DuplicateMovieException {
         movies.add(movie);
     }
-    /**
-    * Adds a Theater to the address book
-    */
-    public void addTheater(Theater t) {
-        theaters.add(t);
-    }
+
     //// util methods
     @Override
     public String toString() {
-        return cinemas.asObservableList().size() + " Cinemas, " + tags.asObservableList().size() +  " tags";
+        return cinemas.asObservableList().size() + " Cinemas, " + tags.asObservableList().size() +  " tags, " +
+                movies.asObservableList().size() + " movies";
         // TODO: refine later
     }
 
