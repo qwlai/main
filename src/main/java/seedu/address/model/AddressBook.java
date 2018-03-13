@@ -245,8 +245,8 @@ public class AddressBook implements ReadOnlyAddressBook {
     //// util methods
     @Override
     public String toString() {
-        return cinemas.asObservableList().size() + " Cinemas, " + tags.asObservableList().size() +  " tags, " +
-                movies.asObservableList().size() + " movies";
+        return cinemas.asObservableList().size() + " Cinemas, " + tags.asObservableList().size() +  " tags, "
+                + movies.asObservableList().size() + " movies";
         // TODO: refine later
     }
 

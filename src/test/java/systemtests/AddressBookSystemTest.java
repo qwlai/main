@@ -42,7 +42,6 @@ import seedu.address.model.Model;
 import seedu.address.testutil.TypicalCinemas;
 import seedu.address.ui.BrowserPanel;
 import seedu.address.ui.CommandBox;
-import seedu.address.ui.MovieListPanel;
 
 /**
  * A system test class for AddressBook, which provides access to handles of GUI components and helper methods

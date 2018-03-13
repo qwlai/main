@@ -1,7 +1,6 @@
 package guitests.guihandles;
 
 import javafx.stage.Stage;
-import seedu.address.ui.MovieListPanel;
 
 /**
  * Provides a handle for {@code MainWindow}.
@@ -32,7 +31,7 @@ public class MainWindowHandle extends StageHandle {
         return cinemaListPanel;
     }
 
-    public MovieListPanelHandle getMovieListPanel(){
+    public MovieListPanelHandle getMovieListPanel() {
         return movieListPanel;
     }
 

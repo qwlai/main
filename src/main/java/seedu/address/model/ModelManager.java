@@ -139,8 +139,8 @@ public class ModelManager extends ComponentManager implements Model {
     public ObservableList<Movie> getFilteredMovieList() {
         return FXCollections.unmodifiableObservableList(filteredMovies);
     }
-	
-	@Override
+
+    @Override
     public void updateFilteredMovieList(Predicate<Movie> predicate) {
         requireNonNull(predicate);
         filteredMovies.setPredicate(predicate);

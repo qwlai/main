@@ -13,7 +13,6 @@ import guitests.guihandles.MovieCardHandle;
 import guitests.guihandles.ResultDisplayHandle;
 import seedu.address.model.cinema.Cinema;
 import seedu.address.model.movie.Movie;
-import seedu.address.ui.MovieCard;
 
 /**
  * A set of assertion methods useful for writing GUI tests.
