@@ -26,6 +26,7 @@ import guitests.guihandles.CinemaListPanelHandle;
 import guitests.guihandles.CommandBoxHandle;
 import guitests.guihandles.MainMenuHandle;
 import guitests.guihandles.MainWindowHandle;
+import guitests.guihandles.MovieListPanelHandle;
 import guitests.guihandles.ResultDisplayHandle;
 import guitests.guihandles.StatusBarFooterHandle;
 import seedu.address.MainApp;
@@ -41,6 +42,7 @@ import seedu.address.model.Model;
 import seedu.address.testutil.TypicalCinemas;
 import seedu.address.ui.BrowserPanel;
 import seedu.address.ui.CommandBox;
+import seedu.address.ui.MovieListPanel;
 
 /**
  * A system test class for AddressBook, which provides access to handles of GUI components and helper methods
@@ -103,6 +105,10 @@ public abstract class AddressBookSystemTest {
 
     public CinemaListPanelHandle getCinemaListPanel() {
         return mainWindowHandle.getCinemaListPanel();
+    }
+
+    public MovieListPanelHandle getMovieListPanel() {
+        return mainWindowHandle.getMovieListPanel();
     }
 
     public MainMenuHandle getMainMenu() {

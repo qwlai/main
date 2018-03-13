@@ -9,8 +9,11 @@ import java.util.stream.Collectors;
 
 import guitests.guihandles.CinemaCardHandle;
 import guitests.guihandles.CinemaListPanelHandle;
+import guitests.guihandles.MovieCardHandle;
 import guitests.guihandles.ResultDisplayHandle;
 import seedu.address.model.cinema.Cinema;
+import seedu.address.model.movie.Movie;
+import seedu.address.ui.MovieCard;
 
 /**
  * A set of assertion methods useful for writing GUI tests.
@@ -116,5 +119,15 @@ public class GuiTestAssert {
      */
     public static void assertResultMessage(ResultDisplayHandle resultDisplayHandle, String expected) {
         assertEquals(expected, resultDisplayHandle.getText());
+    }
+
+    /**
+     * Asserts that {@code actualCard} displays the details of {@code expectedMovie}.
+     */
+    public static void assertCardDisplaysMovie(Movie expectedMovie, MovieCardHandle actualCard) {
+        assertEquals(expectedMovie.getName().toString(), actualCard.getName());
+        assertEquals(expectedMovie.getDuration().toString(), actualCard.getDuration());
+        assertEquals(expectedMovie.getRating().toString(), actualCard.getRating());
+        assertEquals(expectedMovie.getStartDate().toString(), actualCard.getStartDate());
     }
 }

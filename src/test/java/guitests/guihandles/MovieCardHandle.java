@@ -8,7 +8,7 @@ import javafx.scene.control.Label;
  */
 public class MovieCardHandle extends NodeHandle<Node> {
     private static final String ID_FIELD_ID = "#id";
-    private static final String NAME_FIELD_ID = "#name";
+    private static final String NAME_FIELD_ID = "#movieName";
     private static final String DURATION_FIELD_ID = "#duration";
     private static final String RATING_FIELD_ID = "#rating";
     private static final String STARTDATE_FIELD_ID = "#startDate";
