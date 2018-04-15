@@ -256,7 +256,7 @@ public class EmailManager extends ComponentManager implements Email {
 
     private static final String STATUS_CLEARED = "cleared.";
     private static final String STATUS_DRAFTED = "drafted.\n";
-    private static final String STATUS_SENT = "sent.";
+    private static final String STATUS_SENT = "sent ";
     private static final String STATUS_LOGIN_FAIL = "You are not logged in to a Gmail account.";
     private static final String STATUS_LOGIN_SENT = "using %1$s";
     private static final String STATUS_LOGIN_SUCCESS = "You are logged in to %1$s";
@@ -1134,35 +1134,41 @@ public class EmailCommandParser implements Parser<EmailCommand> {
         keywordColorCode.put(AddScreeningCommand.COMMAND_ALIAS, DEFAULT_KEYWORD_COLOR);
         keywordColorCode.put(ClearCommand.COMMAND_WORD, DEFAULT_KEYWORD_COLOR);
         keywordColorCode.put(ClearCommand.COMMAND_ALIAS, DEFAULT_KEYWORD_COLOR);
+        keywordColorCode.put(DecryptCommand.COMMAND_WORD, DEFAULT_KEYWORD_COLOR);
+        keywordColorCode.put(DecryptCommand.COMMAND_ALIAS, DEFAULT_KEYWORD_COLOR);
         keywordColorCode.put(DeleteCommand.COMMAND_WORD, DEFAULT_KEYWORD_COLOR);
         keywordColorCode.put(DeleteCommand.COMMAND_ALIAS, DEFAULT_KEYWORD_COLOR);
         keywordColorCode.put(DeleteMovieCommand.COMMAND_WORD, DEFAULT_KEYWORD_COLOR);
         keywordColorCode.put(DeleteMovieCommand.COMMAND_ALIAS, DEFAULT_KEYWORD_COLOR);
         keywordColorCode.put(DeleteTheaterCommand.COMMAND_WORD, DEFAULT_KEYWORD_COLOR);
         keywordColorCode.put(DeleteTheaterCommand.COMMAND_ALIAS, DEFAULT_KEYWORD_COLOR);
+        keywordColorCode.put(DeleteScreeningCommand.COMMAND_WORD, DEFAULT_KEYWORD_COLOR);
+        keywordColorCode.put(DeleteScreeningCommand.COMMAND_ALIAS, DEFAULT_KEYWORD_COLOR);
         keywordColorCode.put(EditCommand.COMMAND_WORD, DEFAULT_KEYWORD_COLOR);
         keywordColorCode.put(EditCommand.COMMAND_ALIAS, DEFAULT_KEYWORD_COLOR);
         keywordColorCode.put(EmailCommand.COMMAND_WORD, DEFAULT_KEYWORD_COLOR);
         keywordColorCode.put(EmailCommand.COMMAND_ALIAS, DEFAULT_KEYWORD_COLOR);
+        keywordColorCode.put(EncryptCommand.COMMAND_WORD, DEFAULT_KEYWORD_COLOR);
+        keywordColorCode.put(EncryptCommand.COMMAND_ALIAS, DEFAULT_KEYWORD_COLOR);
+        keywordColorCode.put(ExitCommand.COMMAND_WORD, DEFAULT_KEYWORD_COLOR);
         keywordColorCode.put(FindCommand.COMMAND_WORD, DEFAULT_KEYWORD_COLOR);
         keywordColorCode.put(FindCommand.COMMAND_ALIAS, DEFAULT_KEYWORD_COLOR);
         keywordColorCode.put(FindMovieCommand.COMMAND_WORD, DEFAULT_KEYWORD_COLOR);
         keywordColorCode.put(FindMovieCommand.COMMAND_ALIAS, DEFAULT_KEYWORD_COLOR);
-        keywordColorCode.put(JumpCommand.COMMAND_WORD, DEFAULT_KEYWORD_COLOR);
-        keywordColorCode.put(JumpCommand.COMMAND_ALIAS, DEFAULT_KEYWORD_COLOR);
-        keywordColorCode.put(SelectCommand.COMMAND_WORD, DEFAULT_KEYWORD_COLOR);
-        keywordColorCode.put(SelectCommand.COMMAND_ALIAS, DEFAULT_KEYWORD_COLOR);
-        keywordColorCode.put(ExitCommand.COMMAND_WORD, DEFAULT_KEYWORD_COLOR);
         keywordColorCode.put(HelpCommand.COMMAND_WORD, DEFAULT_KEYWORD_COLOR);
         keywordColorCode.put(HelpCommand.COMMAND_ALIAS, DEFAULT_KEYWORD_COLOR);
+        keywordColorCode.put(HistoryCommand.COMMAND_WORD, DEFAULT_KEYWORD_COLOR);
+        keywordColorCode.put(HistoryCommand.COMMAND_ALIAS, DEFAULT_KEYWORD_COLOR);
+        keywordColorCode.put(JumpCommand.COMMAND_WORD, DEFAULT_KEYWORD_COLOR);
+        keywordColorCode.put(JumpCommand.COMMAND_ALIAS, DEFAULT_KEYWORD_COLOR);
         keywordColorCode.put(ListCommand.COMMAND_WORD, DEFAULT_KEYWORD_COLOR);
         keywordColorCode.put(ListCommand.COMMAND_ALIAS, DEFAULT_KEYWORD_COLOR);
         keywordColorCode.put(RedoCommand.COMMAND_WORD, DEFAULT_KEYWORD_COLOR);
         keywordColorCode.put(RedoCommand.COMMAND_ALIAS, DEFAULT_KEYWORD_COLOR);
+        keywordColorCode.put(SelectCommand.COMMAND_WORD, DEFAULT_KEYWORD_COLOR);
+        keywordColorCode.put(SelectCommand.COMMAND_ALIAS, DEFAULT_KEYWORD_COLOR);
         keywordColorCode.put(UndoCommand.COMMAND_WORD, DEFAULT_KEYWORD_COLOR);
         keywordColorCode.put(UndoCommand.COMMAND_ALIAS, DEFAULT_KEYWORD_COLOR);
-        keywordColorCode.put(HistoryCommand.COMMAND_WORD, DEFAULT_KEYWORD_COLOR);
-        keywordColorCode.put(HistoryCommand.COMMAND_ALIAS, DEFAULT_KEYWORD_COLOR);
         return keywordColorCode;
     }
 

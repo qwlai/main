@@ -54,14 +54,14 @@ public class SecurityUtil {
     private static final int AES_Key_Size = 128;
     private static final int iteration = 65536;
 
-    public static void encrypt(String filepath, String encryptedFilePath, String password) throws IOException {
+    public static void encrypt(String filepath, String encryptedFilePath, String password) {
         encrypt(new File(filepath), new File(encryptedFilePath), password);
     }
 
     /**
      * Encrypts the given file using AES key using Key given.
      */
-    public static void encrypt(File inputFile, File outputFile, String password) throws IOException {
+    public static void encrypt(File inputFile, File outputFile, String password) {
         try {
             Key pw = generateKey(password);
             Cipher cipher = Cipher.getInstance("AES/ECB/PKCS5Padding");
@@ -76,6 +76,9 @@ public class SecurityUtil {
         } catch (NoSuchPaddingException bpe) {
             logger.severe("Invalid padding provided " + StringUtil.getDetails(bpe));
             throw new AssertionError("Invalid padding.");
+        } catch (IOException e) {
+            logger.severe("File does not exist " + StringUtil.getDetails(e));
+            throw new AssertionError("Invalid file provided.");
         }
     }
 
@@ -154,13 +157,11 @@ public class SecurityUtil {
     @Subscribe
     public void handleEncryptionRequestEvent(EncryptionRequestEvent event) {
         logger.info(LogsCenter.getEventHandlingLogMessage(event, "Local data changed, saving to file"));
-        System.out.println("testing" + event.getPassword());
     }
 
     @Subscribe
     public void handleDecryptionRequestEvent(DecryptionRequestEvent event) {
         logger.info(LogsCenter.getEventHandlingLogMessage(event, "Local data changed, saving to file"));
-        System.out.println("testing" + event.getPassword());
     }
 
 }
@@ -185,7 +186,7 @@ public class AddTheaterCommand extends UndoableCommand {
 
     public static final String MESSAGE_RESIZE_CINEMA_SUCCESS = "Resized Cinema: %1$s";
     public static final String MESSAGE_DUPLICATE_CINEMA = "This cinema already exists in the movie planner.";
-    public static final String MESSAGE_INVALID_THEATERSIZE = "You can only add up to 20 theaters per cinema!";
+    public static final String MESSAGE_INVALID_THEATERSIZE = "You can only have up to 20 theaters per cinema!";
 
     private final Index index;
     private final int newTheaters;
@@ -421,10 +422,9 @@ public class EncryptCommand extends Command {
     public static final String COMMAND_WORD = "encrypt";
     public static final String COMMAND_ALIAS = "enc";
     public static final String MESSAGE_SUCCESS = "MoviePlanner Encrypted!";
-    public static final String MESSAGE_ERRORENCRYPTING = "Error in encrypting!"
-            + " Please make sure file format is correct!";
 
-    public static final String MESSAGE_USAGE = COMMAND_WORD + ": Encrypts MoviePlanner file to prevent data leak.\n "
+    public static final String MESSAGE_USAGE = COMMAND_WORD + ": Encrypts MoviePlanner file to prevent data leak. "
+            + "Ensure that movieplanner.xml exists in data folder.\n"
             + "Parameters: " + PREFIX_PASSWORD + " PASSWORD\n"
             + "Example: " + COMMAND_WORD + " "
             + PREFIX_PASSWORD + "dummypass ";
@@ -529,7 +529,7 @@ public class DecryptCommandParser implements Parser<DecryptCommand> {
                 throw new ParseException(String.format(DecryptCommand.MESSAGE_WRONGPASSWORD,
                         DecryptCommand.MESSAGE_USAGE));
             } catch (IOException e) {
-                throw new ParseException(String.format(MESSAGE_FILE_NOT_FOUND, DecryptCommand.MESSAGE_USAGE));
+                throw new ParseException(String.format(MESSAGE_ENCRYPTED_FILE_NOT_FOUND, DecryptCommand.MESSAGE_USAGE));
             }
         }
 
@@ -614,6 +614,12 @@ public class EncryptCommandParser implements Parser<EncryptCommand> {
             throw new ParseException(String.format(MESSAGE_INVALID_COMMAND_FORMAT, EncryptCommand.MESSAGE_USAGE));
         }
         String password = args.trim();
+        UserPrefs pref = new UserPrefs();
+        File filePath = new File(pref.getMoviePlannerFilePath());
+
+        if (!filePath.exists()) {
+            throw new ParseException(String.format(MESSAGE_FILE_NOT_FOUND, EncryptCommand.MESSAGE_USAGE));
+        }
 
         return new EncryptCommand(password);
     }
@@ -751,12 +757,9 @@ public class Theater {
     @Subscribe
     public void handleEncryptionRequestEvent(EncryptionRequestEvent event) {
         logger.info(LogsCenter.getEventHandlingLogMessage(event, "Encrypted and saving to file"));
-        try {
-            SecurityUtil.encrypt(moviePlannerStorage.getMoviePlannerFilePath(),
-                    moviePlannerStorage.getEncryptedMoviePlannerFilePath(), event.getPassword());
-        } catch (IOException e) {
-            System.out.println(EncryptCommand.MESSAGE_ERRORENCRYPTING);
-        }
+        SecurityUtil.encrypt(moviePlannerStorage.getMoviePlannerFilePath(),
+                moviePlannerStorage.getEncryptedMoviePlannerFilePath(), event.getPassword());
+
     }
 
     @Subscribe

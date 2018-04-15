@@ -397,7 +397,8 @@ public class DeleteScreeningCommandParser implements Parser<DeleteScreeningComma
 public class JumpCommandParser implements Parser<JumpCommand> {
 
     public static final String DATE_FORMAT = "dd/MM/uuuu";
-    private static final int YEAR_LIMIT = 2030;
+    private static final int START_YEAR_LIMIT = 2000;
+    private static final int END_YEAR_LIMIT = 2030;
 
     /**
      * Parses the given {@code String} of arguments in the context of the JumpCommand
@@ -410,7 +411,7 @@ public class JumpCommandParser implements Parser<JumpCommand> {
         String trimmedDate = args.trim();
         try {
             LocalDate dateProvided = LocalDate.parse(trimmedDate, dtf);
-            if (dateProvided.getYear() > YEAR_LIMIT) {
+            if (dateProvided.getYear() > END_YEAR_LIMIT || dateProvided.getYear() < START_YEAR_LIMIT) {
                 throw new IllegalValueException(MESSAGE_INVALID_YEAR);
             }
             return new JumpCommand(dateProvided);
@@ -456,7 +457,7 @@ public class JumpCommandParser implements Parser<JumpCommand> {
         DateTimeFormatter dtf = DateTimeFormatter.ofPattern(DATE_TIME_FORMAT).withResolverStyle(ResolverStyle.STRICT);
         LocalDateTime screeningDateTime = LocalDateTime.parse(trimmedDateTime, dtf);
 
-        if (screeningDateTime.getYear() > YEAR_LIMIT) {
+        if (screeningDateTime.getYear() > END_YEAR_LIMIT || screeningDateTime.getYear() < START_YEAR_LIMIT) {
             throw new IllegalValueException(Messages.MESSAGE_INVALID_YEAR);
         }
 
