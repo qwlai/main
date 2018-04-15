@@ -110,7 +110,6 @@ public class AddScreeningCommand extends UndoableCommand {
             String movieName = movie.getName().toString();
             toAdd = new Screening(movieName, theater, toAddScreeningDateTime, toAddScreeningEndDateTime);
             updatedCinema = generateUpdatedCinema(toAdd);
-            movie.addScreening(toAdd);
         } else {
             throw new CommandException(Messages.MESSAGE_INVALID_SCREENING);
         }

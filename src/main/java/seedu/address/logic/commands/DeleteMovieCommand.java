@@ -8,8 +8,11 @@ import java.util.Objects;
 import seedu.address.commons.core.Messages;
 import seedu.address.commons.core.index.Index;
 import seedu.address.logic.commands.exceptions.CommandException;
+import seedu.address.model.cinema.Cinema;
+import seedu.address.model.cinema.Theater;
 import seedu.address.model.movie.Movie;
 import seedu.address.model.movie.exceptions.MovieNotFoundException;
+import seedu.address.model.screening.Screening;
 //@@author slothhy
 /**
  * Deletes a movie identified using it's last displayed index from the movie planner.
@@ -34,12 +37,25 @@ public class DeleteMovieCommand extends UndoableCommand {
         this.targetIndex = targetIndex;
     }
 
+    private void deleteScreenings() {
+        for (Cinema c : model.getFilteredCinemaList()) {
+            for (Theater t : c.getTheaters()) {
+                for (Screening s : t.getScreeningList()) {
+                    System.out.println("screening");
+                    if (s.getMovieName().equals(movieToDelete.getName().toString())) {
+                        System.out.println("ENTERED");
+                        t.deleteScreening(s);
+                    }
+                }
+            }
+        }
+    }
 
     @Override
     public CommandResult executeUndoableCommand() {
         requireNonNull(movieToDelete);
         try {
-            movieToDelete.deleteScreenings();
+            deleteScreenings();
             model.deleteMovie(movieToDelete);
         } catch (MovieNotFoundException mnfe) {
             throw new AssertionError("The target movie cannot be missing");
