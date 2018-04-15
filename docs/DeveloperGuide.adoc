@@ -1717,5 +1717,79 @@ Expected: This command will fail as the year is not between 2000 to 2030. An err
 ... `jump 28/03/1999` +
 Expected: This command will fail as the year is not between 2000 to 2030. An error message "Please provide a valid year. The year provided should be between 2000 and 2030, inclusive of year 2000 and 2030." will be shown in the status message.
 
+=== Sending a email
+
+. Editing the email message field
+.. Prerequisites: The email command's msg parameter should have at least *1* character.
+
+.. Test case:
+... `email msg/This is a message.` +
+Expected: "This is a message." will be reflected in the Message field of the Email Draft tab.
+
+.. Test case:
+... `email msg/` +
+Expected: This command will fail as the msg parameter is empty.
+
+. Editing the email subject field
+.. Prerequisites: The email command's subj parameter should have at least *1* character.
+
+.. Test case:
+... `email subj/Main subject` +
+Expected: "Main subject" will be reflected in the Subject field of the Email Draft tab.
+
+.. Test case:
+... `email subj/` +
+Expected: This command will fail as the subj parameter is empty.
+
+. Editing the email recipient field
+.. Prerequisites: The email command's recp parameter should have at least *1* character.
+
+.. Test case:
+... `email recp/someone@gmail.com` +
+Expected: "someone@gmail.com" will be reflected in the Recipients field of the Email Draft tab.
+
+.. Test case:
+... `email recp/` +
+Expected: This command will fail as the msg parameter is empty.
+
+. Logging in using Gmail account in MVP
+.. Prerequisites: A Gmail account must be provided to log in to the email feature. The username and password parameter must not be empty.
+
+.. Test case:
+... `email lgn/test@gmail.com:123` +
+Expected: "You are logged in to test@gmail.com" will be shown in the status message.
+
+.. Test case:
+... `email lgn/` +
+Expected: This command will fail as the username and password parameters are empty.
+
+.. Test case:
+... `email lgn/test@gmail.com` +
+Expected: This command will fail as the password parameter is empty.
+
+.. Test case:
+... `email lgn/:123` +
+Expected: This command will fail as the username parameter is empty.
+
+.. Test case:
+... `email lgn/test@yahoo.com:123` +
+Expected: This command will fail as the account provided is not a Gmail account.
+
+. Sending an email via MVP
+.. Prerequisites: The Subject, Recipients and Message field must not be empty, and you must be logged in with a registered Gmail account and have the *Allow less secured apps* setting turned on.
+
+.. Test case:
+... `email func/send` +
+Expected: Assuming a registered email account "test@gmail.com" is successfully logged in. Then "Email have been sent using test@gmail.com" will be shown in the status message.
+
+.. Test case:
+... `email func/send` +
+Expected: Assuming a non-registered email account, or an incorrect username or password has been entered.
+An error message "MVP is unable to log in to your gmail account. Please check the following: " will be shown in the status message.
+
+.. Test case:
+... `email func/send` +
+Expected: Assuming an invalid file path to an attachment had been entered.
+An error message "An unexpected error have occurred. Please try again later." will be shown in the status message.
 
 <<DeveloperGuide.adoc#, Back to top>>
