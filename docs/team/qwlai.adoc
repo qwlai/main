@@ -30,11 +30,12 @@ I have also added a jump command for user to navigate the dates in the schedule.
 
 * *Other contributions*:
 
-*** Managed releases `v1.3` - `v1.5rc` (3 releases) on GitHub
+** Project management
+*** Managed releases `v1.3` - `v1.5` (3 releases) on GitHub
 ** Enhancements to existing features:
 *** Add alias to existing commands (Pull requests https://github.com/CS2103JAN2018-W11-B2/main/pull/24[#24])
 ** Documentation:
-*** Updated User Guide with gifs to show the before and after when a command is entered (example: https://github.com/CS2103JAN2018-W11-B2/main/commit/6a2884b4c57c69eb577db0e6859b0b630c7cf624[1])
+*** Updated User Guide to show the before and after when a command is entered (Pull requests https://github.com/CS2103JAN2018-W11-B2/main/pull/162/[#162])
 ** Tools:
 *** Integrated a third party library (CalendarFX) to the project (Pull requests https://github.com/CS2103JAN2018-W11-B2/main/pull/88[#88])
 
