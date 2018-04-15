@@ -42,6 +42,10 @@ MoVie Planner (MVP) - is a desktop movie planner built to streamline a theater m
 
 include::../UserGuide.adoc[tag=findmovie]
 
+include::../UserGuide.adoc[tag=findmovie]
+
+include::../UserGuide.adoc[tag=deletemovie]
+
 
 == Contributions to the Developer Guide
 

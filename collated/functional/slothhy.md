@@ -25,6 +25,7 @@ public class AddMovieCommand extends UndoableCommand {
 
     public static final String MESSAGE_SUCCESS = "New movie added: %1$s";
     public static final String MESSAGE_DUPLICATE_MOVIE = "This movie already exists in the movie planner";
+    public static final String MESSAGE_INVALID_MOVIEDURATION = "Movie duration cannot exceed 360 minutes";
 
     private final Movie toAdd;
 
@@ -40,6 +41,9 @@ public class AddMovieCommand extends UndoableCommand {
     public CommandResult executeUndoableCommand() throws CommandException {
         requireNonNull(model);
         try {
+            if (Integer.parseInt(toAdd.getDuration().duration) > 360) {
+                throw new CommandException(MESSAGE_INVALID_MOVIEDURATION);
+            }
             model.addMovie(toAdd);
             return new CommandResult(String.format(MESSAGE_SUCCESS, toAdd));
         } catch (DuplicateMovieException e) {
@@ -506,10 +510,7 @@ public class Movie {
         }
 
         Movie otherMovie = (Movie) other;
-        return otherMovie.getName().equals(this.getName())
-                && otherMovie.getDuration().equals(this.getDuration())
-                && otherMovie.getRating().equals(this.getRating())
-                && otherMovie.getStartDate().equals(this.getStartDate());
+        return otherMovie.getName().equals(this.getName()) && otherMovie.getStartDate().equals(this.getStartDate());
     }
 
     @Override

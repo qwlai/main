@@ -11,7 +11,7 @@ We are a team based in the http://www.comp.nus.edu.sg[School of Computing, Natio
 
 === Lai Qi Wei
 image::qwlai.jpg[width="150", align="left"]
-{empty}[https://github.com/qwlai[github]] [<<qwlai#, portfolio>>]
+{empty}[https://github.com/qwlai[github]] [https://cs2103jan2018-w11-b2.github.io/main/team/qwlai.html[portfolio]]
 
 Role: Developer +
 Responsibilities: Logic and Model Development
@@ -20,7 +20,7 @@ Responsibilities: Logic and Model Development
 
 === Oh Han Yi
 image::slothhy.jpg[width="150", align="left"]
-{empty}[https://github.com/slothhy[github]] [<<hanyi#, portfolio>>]
+{empty}[https://github.com/slothhy[github]] [https://cs2103jan2018-w11-b2.github.io/main/team/hanyi.html[portfolio]]
 
 Role: Developer +
 Responsibilities: Storage Development, Logic Handling
@@ -29,7 +29,7 @@ Responsibilities: Storage Development, Logic Handling
 
 === Chan Jun Yuan
 image::tinyjy94.jpg[width="150", align="left"]
-{empty}[https://github.com/tinyjy94[github]] [<<tinyjy94#, portfolio>>]
+{empty}[https://github.com/tinyjy94[github]] [https://cs2103jan2018-w11-b2.github.io/main/team/tinyjy94.html[portfolio]]
 
 Role: Developer +
 Responsibilities: Model Development, Logic and Storage Handling
@@ -38,7 +38,7 @@ Responsibilities: Model Development, Logic and Storage Handling
 
 === Chan Yik Wai
 image::chanyikwai.png[width="150", align="left"]
-{empty}[https://github.com/chanyikwai[github]] [<<chanyikwai#, portfolio>>]
+{empty}[https://github.com/chanyikwai[github]] [https://cs2103jan2018-w11-b2.github.io/main/team/chanyikwai.html[portfolio]]
 
 Role: Developer +
 Responsibilities: UI and Model Development

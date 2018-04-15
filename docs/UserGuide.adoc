@@ -297,6 +297,7 @@ Copies the schedule of the 1st cinema's 1st theater to its 2nd theater.
 
 You can find movie related commands like add, find, delete movie in this section. This allows you to manage a list of movies.
 
+// tag::addmovie[]
 ==== Adding a movie: `addmovie` | `am` | `Available in v1.2`
 Alias: `am`
 
@@ -306,6 +307,7 @@ Format: `addmovie n/MOVIE_NAME d/DURATION r/RATING sd/START_DATE t/TAG`
 
 [NOTE]
 ====
+* Movies can have the same name but `StartDate` must be different.
 * Once a movie is tagged, you cannot add or remove tags to a movie.
 ====
 
@@ -318,6 +320,7 @@ Adds a movie named `Spiderman 1` released on `29/04/2012` with a duration of `12
 
 .Before and after `am n/Spiderman 1 d/121 r/PG sd/29/04/2012 t/superhero t/Spiderman`
 image::AddMovie.png[width="1000"]
+// end::addmovie[]
 
 // tag::findmovie[]
 ==== Finding movies by user input: `findmovie` | `fm` | `Available in v1.3`
@@ -348,8 +351,9 @@ Displays all movies from tag `superhero` with name `Spiderman` like `Spiderman 1
 
 .Before and after `findmovie n/Spiderman t/superhero`
 image::FindMovie.png[width="1000"]
-//end::findmovie[]
+// end::findmovie[]
 
+// tag::deletemovie[]
 ==== Deleting a movie : `deletemovie` | `dm` | `Available in V1.2`
 Alias: `dm`
 
@@ -374,6 +378,7 @@ Deletes the 3rd movie in the results of the `find` command. An example is shown 
 
 .Before and after `dm 3`
 image::DeleteMovie.png[width="1000"]
+// end::deletemovie[]
 
 <<UserGuide.adoc#, Back to top>>
 

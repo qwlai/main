@@ -23,7 +23,6 @@ public class Movie {
     private final Rating rating;
     private final StartDate startDate;
     private final UniqueTagList tags;
-    private final ArrayList<Screening> screenings;
 
     public Movie(MovieName movieName, Duration duration, Rating rating, StartDate startDate, Set<Tag> tags) {
         requireAllNonNull(movieName, duration, rating, startDate);
@@ -33,24 +32,6 @@ public class Movie {
         this.startDate = startDate;
         // protect internal tags from changes in the arg list
         this.tags = new UniqueTagList(tags);
-        this.screenings = new ArrayList<>();
-    }
-
-    public void addScreening(Screening s) {
-        screenings.add(s);
-    }
-
-    /**
-     * Called by DeleteMovieCommand.
-     * It will delete all screenings linked to the movie.
-     */
-    public void deleteScreenings() {
-        for (int i = 0; i < screenings.size(); i++) {
-            Screening s = screenings.get(i);
-            Theater t = s.getTheater();
-            t.deleteScreening(s);
-            screenings.remove(i);
-        }
     }
 
     public MovieName getName() {
@@ -88,10 +69,7 @@ public class Movie {
         }
 
         Movie otherMovie = (Movie) other;
-        return otherMovie.getName().equals(this.getName())
-                && otherMovie.getDuration().equals(this.getDuration())
-                && otherMovie.getRating().equals(this.getRating())
-                && otherMovie.getStartDate().equals(this.getStartDate());
+        return otherMovie.getName().equals(this.getName());
     }
 
     @Override

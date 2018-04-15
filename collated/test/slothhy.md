@@ -301,6 +301,39 @@ public class AddMovieCommandParserTest {
     }
 }
 ```
+###### \java\seedu\address\model\movie\DurationTest.java
+``` java
+public class DurationTest {
+
+    @Test
+    public void constructor_null_throwsNullPointerException() {
+        Assert.assertThrows(NullPointerException.class, () -> new Duration(null));
+    }
+
+    @Test
+    public void constructor_invalidPhone_throwsIllegalArgumentException() {
+        String invalidDuration = "";
+        Assert.assertThrows(IllegalArgumentException.class, () -> new Duration(invalidDuration));
+    }
+
+    @Test
+    public void isValidDuration() {
+        // null duration
+        Assert.assertThrows(NullPointerException.class, () -> Duration.isValidDuration(null));
+
+        // invalid duration
+        assertFalse(Duration.isValidDuration("")); // empty string
+        assertFalse(Duration.isValidDuration(" ")); // spaces only
+        assertFalse(Duration.isValidDuration("phone")); // non-numeric
+        assertFalse(Duration.isValidDuration("9011p041")); // alphabets within digits
+        assertFalse(Duration.isValidDuration("9312 1534")); // spaces within digits
+
+        // valid duration
+        assertTrue(Duration.isValidDuration("60"));
+        assertTrue(Duration.isValidDuration("120"));
+    }
+}
+```
 ###### \java\seedu\address\model\movie\MovieNameTest.java
 ``` java
 public class MovieNameTest {
@@ -333,6 +366,62 @@ public class MovieNameTest {
         assertTrue(MovieName.isValidName("peter the 2nd")); // alphanumeric characters
         assertTrue(MovieName.isValidName("Capital Tan")); // with capital letters
         assertTrue(MovieName.isValidName("David Roger Jackson Ray Jr 2nd")); // long names
+    }
+}
+```
+###### \java\seedu\address\model\movie\NameContainsKeywordsPredicateTest.java
+``` java
+public class NameContainsKeywordsPredicateTest {
+
+    @Test
+    public void equals() {
+        List<String> firstPredicateKeywordList = Collections.singletonList("first");
+        List<String> secondPredicateKeywordList = Arrays.asList("first", "second");
+
+        NameContainsKeywordsPredicate firstPredicate = new NameContainsKeywordsPredicate(firstPredicateKeywordList);
+        NameContainsKeywordsPredicate secondPredicate = new NameContainsKeywordsPredicate(secondPredicateKeywordList);
+
+        // same object -> returns true
+        assertTrue(firstPredicate.equals(firstPredicate));
+
+        // same values -> returns true
+        NameContainsKeywordsPredicate firstPredicateCopy = new NameContainsKeywordsPredicate(firstPredicateKeywordList);
+        assertTrue(firstPredicate.equals(firstPredicateCopy));
+
+        // different types -> returns false
+        assertFalse(firstPredicate.equals(1));
+
+        // null -> returns false
+        assertFalse(firstPredicate.equals(null));
+
+        // different cinema -> returns false
+        assertFalse(firstPredicate.equals(secondPredicate));
+    }
+
+    @Test
+    public void test_nameContainsKeywords_returnsTrue() {
+        // One keyword
+        NameContainsKeywordsPredicate predicate = new NameContainsKeywordsPredicate(Collections.singletonList("Ghost"));
+        assertTrue(predicate.test(new MovieBuilder().withMovieName("Ghost Hunter").build()));
+
+        // Multiple keywords
+        predicate = new NameContainsKeywordsPredicate(Arrays.asList("Ghost", "Hunter"));
+        assertTrue(predicate.test(new MovieBuilder().withMovieName("Ghost Hunter").build()));
+
+        // Mixed-case keywords
+        predicate = new NameContainsKeywordsPredicate(Arrays.asList("sPiDerMan"));
+        assertTrue(predicate.test(new MovieBuilder().withMovieName("Spiderman").build()));
+
+        // Zero keywords
+        predicate = new NameContainsKeywordsPredicate(Collections.emptyList());
+        assertTrue(predicate.test(new MovieBuilder().withMovieName("Ghost").build()));
+    }
+
+    @Test
+    public void test_nameDoesNotContainKeywords_returnsFalse() {
+        // Non-matching keyword
+        NameContainsKeywordsPredicate predicate = new NameContainsKeywordsPredicate(Arrays.asList("Incredibles"));
+        assertFalse(predicate.test(new MovieBuilder().withMovieName("Spiderman").build()));
     }
 }
 ```
