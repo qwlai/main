@@ -2,13 +2,10 @@ package seedu.address.model.movie;
 
 import static seedu.address.commons.util.CollectionUtil.requireAllNonNull;
 
-import java.util.ArrayList;
 import java.util.Collections;
 import java.util.Objects;
 import java.util.Set;
 
-import seedu.address.model.cinema.Theater;
-import seedu.address.model.screening.Screening;
 import seedu.address.model.tag.Tag;
 import seedu.address.model.tag.UniqueTagList;
 //@@author slothhy

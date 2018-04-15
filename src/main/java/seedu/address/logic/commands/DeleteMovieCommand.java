@@ -2,6 +2,7 @@ package seedu.address.logic.commands;
 
 import static java.util.Objects.requireNonNull;
 
+import java.util.ArrayList;
 import java.util.List;
 import java.util.Objects;
 
@@ -37,15 +38,20 @@ public class DeleteMovieCommand extends UndoableCommand {
         this.targetIndex = targetIndex;
     }
 
+    /**
+     * Delete screenings associated with the movie
+     */
     private void deleteScreenings() {
         for (Cinema c : model.getFilteredCinemaList()) {
             for (Theater t : c.getTheaters()) {
+                ArrayList<Screening> deleteList = new ArrayList<>();
                 for (Screening s : t.getScreeningList()) {
-                    System.out.println("screening");
                     if (s.getMovieName().equals(movieToDelete.getName().toString())) {
-                        System.out.println("ENTERED");
-                        t.deleteScreening(s);
+                        deleteList.add(s);
                     }
+                }
+                for (int i = 0; i < deleteList.size(); i++) {
+                    t.deleteScreening(deleteList.get(i));
                 }
             }
         }
