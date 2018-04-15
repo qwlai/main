@@ -195,8 +195,12 @@ public class BrowserPanel extends UiPart<Region> {
         browserPane.getChildren().clear();
 
         if (event.getMoviePlanner() != null) { // handling undo, redo, clear all
-            if (hasCinema(event.getMoviePlanner().getCinemaList())) {
-                loadCinemaSchedule(currentCinema, currentDate);
+            try {
+                if (hasCinema(event.getMoviePlanner().getCinemaList())) {
+                    loadCinemaSchedule(currentCinema, currentDate);
+                }
+            } catch (NullPointerException npe) {
+                // catches npe when no schedule is being showed, do nothing as undo, redo and clear will work as normal
             }
         } else { // handling new screening
             currentCinema = event.getCinema();
