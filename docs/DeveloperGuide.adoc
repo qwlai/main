@@ -1248,12 +1248,12 @@ Priorities: High (must have) - `* * \*`, Medium (nice to have) - `* \*`, Low (un
 
 *MSS*
 
-1.  User requests to list movie
-2.  MoviePlanner shows a list of movies
-3.  User requests to delete a specific movie in the list
-4.  MoviePlanner shows confirmation box for deleting the selected movie
-5.  User confirms deletion of selected movie
-6.  MoviePlanner deletes the selected movie upon confirmation
+1.  User requests to list movie.
+2.  MoviePlanner shows a list of movies.
+3.  User requests to delete a specific movie in the list.
+4.  MoviePlanner shows confirmation box for deleting the selected movie.
+5.  User confirms deletion of selected movie.
+6.  MoviePlanner deletes the selected movie upon confirmation.
 +
 Use case ends.
 
@@ -1276,8 +1276,8 @@ Use case resumes at step 2.
 
 *MSS*
 
-1.  User requests to find movie
-2.  MoviePlanner shows a list of cinema screening corresponding movie
+1.  User requests to find movie.
+2.  MoviePlanner shows a list of cinema screening corresponding movie.
 +
 Use case ends.
 
@@ -1292,6 +1292,33 @@ Use case ends.
 +
 Use case ends.
 
+[discrete]
+=== Use case: Add Theater
+
+*MSS*
+
+1.  User requests to add theaters to a specific cinema in the list.
+2.  User enters addtheater command.
+3.  MoviePlanner adds theaters to the selected cinema.
++
+Use case ends.
+
+*Extensions*
+
+[none]
+* 2a. User enters wrong format.
++
+[none]
+** 2a1. MoviePlanner displays wrong format error message.
++
+Use case ends.
+
+* 2b. User enters too many theaters such that the result is greater than 20.
++
+[none]
+** 2b1. MoviePlanner displays "too many theater" error message.
++
+Use case ends.
 
 <<DeveloperGuide.adoc#, Back to top>>
 
